@@ -20,21 +20,32 @@ Please check our [Video Demo (4k)](https://www.youtube.com/watch?v=bmU75rsmv6s) 
 
 ## Usage
 ### Installation
-Option 1: 
+Option 0: 
+``` 
+docker run -it -d -P --gpus all --name lseg-4 nvcr.io/nvidia/pytorch:20.06-py3
+docker exec -it lseg-4 bash
+pip install torch-encoding
+```
 
-``` pip install -r requirements.txt ```
+Option 1: 
+``` 
+pip install gdown
+gdown --id "1ayk6NXURI_vIPlym16f_RG3ffxBWHxvb"
+```
 
 Option 2: 
 ```
 conda install ipython
 pip install torch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2
-pip install git+https://github.com/zhanghang1989/PyTorch-Encoding/
-pip install pytorch-lightning==1.3.5
+<!-- pip install git+https://github.com/zhanghang1989/PyTorch-Encoding/ -->
+<!-- pip install pytorch-lightning==1.3.5 -->
+pip install pytorch-lightning==1.4.0rc0
+pip install torch-encoding
 pip install opencv-python
 pip install imageio
 pip install ftfy regex tqdm
 pip install git+https://github.com/openai/CLIP.git
-pip install altair
+pip install altair==4.0.0
 pip install streamlit
 pip install --upgrade protobuf
 pip install timm
