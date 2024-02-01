@@ -19,40 +19,64 @@ We present LSeg, a novel model for language-driven semantic image segmentation. 
 Please check our [Video Demo (4k)](https://www.youtube.com/watch?v=bmU75rsmv6s) to further showcase the capabilities of LSeg.
 
 ## Usage
+### Successed Environment
+
+- `GPU`: NVIDIA TITAN Xp
+- `Driver Version`: 535.154.05
+- `CUDA Version`: 12.2
+- `nvcc` :Cuda compilation tools, release 11.0, V11.0.167, Build cuda_11.0_bu.TC445_37.28358933_0
+- `torch.__version__` : '2.0.0+cu118'
+- `torchaudio.__version__` : '2.0.1+cu118'
+- `torchvision.__version__` : '0.15.1+cu118'
+- `torchmetrics.__version__`: '0.6.0'
+- `pytorch-lightning` : 1.4.0rc0
+- `torch-encoding` git+https://github.com/zhanghang1989/PyTorch-Encoding@c959dab8312b637fcc7edce83607acb4b0f82645
+
 ### Installation
-Option 0: 
-``` 
-docker run -it -d -P --gpus all --name lseg-4 nvcr.io/nvidia/pytorch:20.06-py3
-docker exec -it lseg-4 bash
-pip install torch-encoding
+Option 0: NVIDIA Docker Image 중 PyTorch 20.06 Version 
+
 ```
+docker pull nvcr.io/nvidia/pytorch:20.06-py3
+docker run -it -d -P --gpus all --name [DOCKER_NAME] nvcr.io/nvidia/pytorch:20.06-py3
+docker exec -it [DOCKER_NAME] /bin/bash
+```
+
 
 Option 1: 
 ``` 
+pip install wget 
+wget https://repo.anaconda.com/archive/Anaconda3-2021.11-Linux-x86_64.sh
+sh Anaconda3-2021.11-Linux-x86_64.sh
+source ~/.bashrc
+
+mkdir checkpoints
+cd checkpoints
 pip install gdown
 gdown --id "1ayk6NXURI_vIPlym16f_RG3ffxBWHxvb"
+cd ../
 ```
 
 Option 2: 
 ```
 conda install ipython
-pip install torch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2
-<!-- pip install git+https://github.com/zhanghang1989/PyTorch-Encoding/ -->
-<!-- pip install pytorch-lightning==1.3.5 -->
+pip install torch==2.0.0+cu118 torchvision==0.15.1+cu118 torchaudio==2.0.1+cu118 -f https://download.pytorch.org/whl/torch_stable.html
 pip install pytorch-lightning==1.4.0rc0
-pip install torch-encoding
 pip install opencv-python
 pip install imageio
 pip install ftfy regex tqdm
+pip install git+https://github.com/zhanghang1989/PyTorch-Encoding/
 pip install git+https://github.com/openai/CLIP.git
 pip install altair==4.0.0
-pip install streamlit
-pip install --upgrade protobuf
+pip install streamlit==1.11.0
+pip install protobuf==3.20.3
 pip install timm
 pip install tensorboardX
 pip install matplotlib
 pip install test-tube
 pip install wandb
+pip install torch-encoding
+pip install torchmetrics==0.6.0
+apt-get -y install libgl1-mesa-glx
 ```
 
 ### Data Preparation
@@ -69,6 +93,8 @@ Note: for demo, if you want to use random inputs, you can ignore data loading an
 ### 🌻 Try demo now
 
 #### Download Demo Model
+- [Notice] `ImportError: libGL.so.1: cannot open shared object file: No such file or directory` 경고문이 나오지만 다시 `streamlit run lseg_app.py` 실행하면 올바르게 실행된다.
+- 
 <table>
   <thead>
     <tr style="text-align: right;">
