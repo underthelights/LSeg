@@ -20,52 +20,32 @@ Please check our [Video Demo (4k)](https://www.youtube.com/watch?v=bmU75rsmv6s) 
 
 ## Usage
 ### Successed Environment
+I ran on a Google Colab T4. You can run [training_google_colab.ipynb](https://github.com/trislee02/lseg/blob/main/training_google_colab.ipynb) on Google Colab with a hosted runtime T4.
 
-- `GPU`: NVIDIA TITAN Xp
-- `Driver Version`: 535.154.05
+- `GPU`: NVIDIA Tesla T4
+- `nvcc --version`: cuda_12.2.r12.2/compiler.33191640_0
 - `CUDA Version`: 12.2
-- `nvcc` :Cuda compilation tools, release 11.0, V11.0.167, Build cuda_11.0_bu.TC445_37.28358933_0
-- `torch.__version__` : '2.0.0+cu118'
-- `torchaudio.__version__` : '2.0.1+cu118'
-- `torchvision.__version__` : '0.15.1+cu118'
-- `torchmetrics.__version__`: '0.6.0'
-- `pytorch-lightning` : 1.4.0rc0
+- `torch.__version__` : 2.1.0+cu121
+- `torchaudio.__version__` : 2.1.0+cu121
+- `torchvision.__version__` : 0.16.0+cu121
+- `torchmetrics.__version__`: 0.7.0
+- `pytorch-lightning` : 1.9.0
 - `torch-encoding` git+https://github.com/zhanghang1989/PyTorch-Encoding@c959dab8312b637fcc7edce83607acb4b0f82645
 
 ### Installation
-Option 0: NVIDIA Docker Image 중 PyTorch 20.06 Version 
-
+#### Create a Conda environment
 ```
-docker pull nvcr.io/nvidia/pytorch:20.06-py3
-docker run -it -d -P --gpus all --name [DOCKER_NAME] nvcr.io/nvidia/pytorch:20.06-py3
-docker exec -it [DOCKER_NAME] /bin/bash
+conda create -n lang-seg
+conda activate lang-seg
 ```
-
-
-Option 1: 
-``` 
-pip install wget 
-wget https://repo.anaconda.com/archive/Anaconda3-2021.11-Linux-x86_64.sh
-sh Anaconda3-2021.11-Linux-x86_64.sh
-source ~/.bashrc
-
-mkdir checkpoints
-cd checkpoints
-pip install gdown
-gdown --id "1ayk6NXURI_vIPlym16f_RG3ffxBWHxvb"
-cd ../
-```
-
-Option 2: 
+#### Install libraries
 ```
 conda install ipython
-pip install torch==2.0.0+cu118 torchvision==0.15.1+cu118 torchaudio==2.0.1+cu118 -f https://download.pytorch.org/whl/torch_stable.html
-pip install pytorch-lightning==1.4.0rc0
+pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 --index-url https://download.pytorch.org/whl/cu121
+pip install pytorch-lightning==1.9.0
 pip install opencv-python
 pip install imageio
 pip install ftfy regex tqdm
-pip install git+https://github.com/zhanghang1989/PyTorch-Encoding/
-pip install git+https://github.com/openai/CLIP.git
 pip install altair==4.0.0
 pip install streamlit==1.11.0
 pip install protobuf==3.20.3
@@ -74,9 +54,9 @@ pip install tensorboardX
 pip install matplotlib
 pip install test-tube
 pip install wandb
-pip install torch-encoding
-pip install torchmetrics==0.6.0
-apt-get -y install libgl1-mesa-glx
+pip install torchmetrics==0.7.0
+pip install git+https://github.com/zhanghang1989/PyTorch-Encoding/
+pip install git+https://github.com/openai/CLIP.git
 ```
 
 ### Data Preparation
