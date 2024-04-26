@@ -11,6 +11,7 @@ import cv2
 import random
 import math
 from torchvision import transforms
+from pytorch_lightning.loggers import TestTubeLogger
 
 
 def do_training(hparams, model_constructor):
@@ -33,7 +34,7 @@ def do_training(hparams, model_constructor):
 
     hparams.sync_batchnorm = True
 
-    ttlogger = pl.loggers.TestTubeLogger(
+    ttlogger = TestTubeLogger(
         "checkpoints", name=hparams.exp_name, version=hparams.version
     )
 
