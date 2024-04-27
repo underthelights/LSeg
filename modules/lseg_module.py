@@ -106,7 +106,7 @@ class LSegModule(LSegmentationModule):
         f.close()
         if dataset in ['ade20k']:
             labels = labels[1:]
-        print('** {} labels are loaded **'.format(len(labels)))
+        print('** {} labels are loaded **'.format(labels))
         return labels
 
 
