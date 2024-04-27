@@ -65,8 +65,7 @@ class LSegmentationModule(pl.LightningModule):
     
 
     def training_step(self, batch, batch_nb):
-        img, target = batch
-        print(f"Image shape: {img.shape}, Target shape: {target.shape}")
+        img, target = batch # img.shape = (batch_size, 3, 480, 480), target.shape = (batch_size, 480, 480)
         with amp.autocast(enabled=self.enabled):
             out = self(img)
             multi_loss = isinstance(out, tuple)
