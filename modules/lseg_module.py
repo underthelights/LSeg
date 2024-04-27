@@ -71,6 +71,7 @@ class LSegModule(LSegmentationModule):
         )
         # print(kwargs)
 
+        # TODO-TRI: Remove this line
         labels = self.get_labels('ade20k')
 
         self.net = LSegNet(
@@ -97,7 +98,6 @@ class LSegModule(LSegmentationModule):
     def get_labels(self, dataset):
         labels = []
         path = 'label_files/{}_objectInfo150.txt'.format(dataset)
-        print('** Load labels from {} **'.format(path))
         assert os.path.exists(path), '*** Error : {} not exist !!!'.format(path)
         f = open(path, 'r') 
         lines = f.readlines()      
@@ -107,7 +107,6 @@ class LSegModule(LSegmentationModule):
         f.close()
         if dataset in ['ade20k']:
             labels = labels[1:]
-        print('** {} labels are loaded **'.format(labels))
         return labels
 
 
