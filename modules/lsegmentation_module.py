@@ -65,7 +65,7 @@ class LSegmentationModule(pl.LightningModule):
     
 
     def training_step(self, batch, batch_nb):
-        img, target = batch
+        img, target = batch # img.shape = (batch_size, 3, 480, 480), target.shape = (batch_size, 480, 480)
         with amp.autocast(enabled=self.enabled):
             out = self(img)
             multi_loss = isinstance(out, tuple)
@@ -192,6 +192,7 @@ class LSegmentationModule(pl.LightningModule):
             num_workers=16,
         )
 
+    # TODO-TRI: Modify this to fit the new dataset
     def get_trainset(self, dset, augment=False, **kwargs):
         print(kwargs)
         if augment == True:
@@ -214,6 +215,7 @@ class LSegmentationModule(pl.LightningModule):
 
         return dset
 
+    # TODO-TRI: Modify this to fit the new dataset
     def get_valset(self, dset, augment=False, **kwargs):
         self.val_accuracy = torchmetrics.Accuracy()
         self.val_iou = SegmentationMetric(self.num_classes)
