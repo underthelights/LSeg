@@ -6,7 +6,7 @@ import numpy as np
 import torch
 import torch.utils.data
 import torchvision.transforms as torch_transforms
-import encoding.datasets as enc_ds
+import data.datasets as enc_ds
 
 encoding_datasets = {
     x: functools.partial(enc_ds.get_dataset, x)

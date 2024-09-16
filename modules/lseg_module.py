@@ -71,6 +71,7 @@ class LSegModule(LSegmentationModule):
         )
         # print(kwargs)
 
+        # TODO-TRI: Remove this line
         labels = self.get_labels('ade20k')
 
         self.net = LSegNet(

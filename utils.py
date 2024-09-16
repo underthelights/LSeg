@@ -11,6 +11,7 @@ import cv2
 import random
 import math
 from torchvision import transforms
+from pytorch_lightning.loggers import CSVLogger
 
 
 def do_training(hparams, model_constructor):
@@ -18,7 +19,8 @@ def do_training(hparams, model_constructor):
     model = model_constructor(**vars(hparams))
     # set all sorts of training parameters
     hparams.gpus = -1
-    hparams.accelerator = "ddp"
+    hparams.accelerator = "gpu"
+    hparams.strategy = "ddp"
     hparams.benchmark = True
 
     if hparams.dry_run:
@@ -33,7 +35,7 @@ def do_training(hparams, model_constructor):
 
     hparams.sync_batchnorm = True
 
-    ttlogger = pl.loggers.TestTubeLogger(
+    ttlogger = CSVLogger(
         "checkpoints", name=hparams.exp_name, version=hparams.version
     )
 
